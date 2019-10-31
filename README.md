@@ -84,7 +84,7 @@ Within the file, it is possible to ignore singular files, or even wild cards, me
 Once this .gitignore is defined and saved, running the command *git status* again will show that they are now *invisible* to git and aren't picked up anymore.
 
 #### Staging file(s)
-Running *git status* will show us files that are in the working directory. With the staging area being sent to the directory on the staged files.
+Running *git status* will show us files that are in the working directory, and whether they are staged or not. Files in the working directory can either be untracked (a new file which you did not _add_), or tracked/staged. Imagine the staging area like a middle level between your local directory and the github repo, anything you modified and added will sit in the staging area but you can pick and choose from the staging area which ones get committed and pushed.
 
 The useful thing about staging files is if lots of files have been modified by you over the course of the day, the staging area can be used to push multiple commits instead of all the changed files at once.
 
