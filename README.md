@@ -14,7 +14,7 @@ Everybody has a local repo. The local repo has all the info about the files with
 
 ---
 
-## Local
+## Local (on your machine)
 
 ---
 
@@ -41,15 +41,15 @@ git config --list
 
 #### Initializing a repository
 
-To track an existing code base by git:
+To track an existing code base by git (i.e if you have a directory you wish to start tracking with git):
 
 ```bash
 git init
 ```
 
-Which will track all the files within the current directory.
+Which will initialize the directory, you will need to add all of the files you wish to be tracked manually (see below).
 
-#### Stop tracking file(s)
+#### Stop tracking the directory
 
 ```bash
 rm -rf .git
@@ -57,34 +57,17 @@ rm -rf .git
 
 As the .git file contains all info about the files and their history.
 
-#### Check status
+#### Check status (your best friend)
 
 ```bash
 git status
 ```
 
-Will provide you with useful information regarding the current branch, tracked and untracked files.
-
-#### Ignoring file(s)
-
-Some files like preferences etc do not need to be pushed with the code, to ignore certain files they must be in the *.gitignore* file. First create such file in the directory:
-
-```bash
-touch .gitignore
-```
-
-Within the file, it is possible to ignore singular files, or even wild cards, meaning ignoring all files with a certain file type.
-
-```bash
-# Within the .gitignore file
-.project  # Ignore singular file
-*.py  # Ignore all .py files (wildcard)
-```
-
-Once this .gitignore is defined and saved, running the command *git status* again will show that they are now *invisible* to git and aren't picked up anymore.
+Will provide you with useful information regarding the current branch, tracked and untracked files, in a nutshell if you want to see any info about what's going on, do this command.
 
 #### Staging file(s)
-Running *git status* will show us files that are in the working directory, and whether they are staged or not. Files in the working directory can either be untracked (a new file which you did not _add_), or tracked/staged. Imagine the staging area like a middle level between your local directory and the github repo, anything you modified and added will sit in the staging area but you can pick and choose from the staging area which ones get committed and pushed.
+Running *git status* will show us files that are in the working directory, and whether they are staged or not. Files in the working directory can either be untracked (a new file which you did not _add_), or tracked/staged.  
+The usual workflow is: create/modify a file > save the changes > add it to the staging area > when you wish to make a _checkpoint_ containing all changes to specific files do a git commit > give it a description so you can see it later. This will commit it locally, to push see the *remote* section.
 
 The useful thing about staging files is if lots of files have been modified by you over the course of the day, the staging area can be used to push multiple commits instead of all the changed files at once.
 
@@ -109,8 +92,26 @@ git reset  # Remove all files from staging area
 git reset .project  # Remove files singularly
 ```
 
+#### Ignoring file(s)
+
+Some files like preferences etc do not need to be pushed with the code, to ignore certain files they must be in the *.gitignore* file. First create such file in the directory:
+
+```bash
+touch .gitignore
+```
+
+Within the file, it is possible to ignore singular files, or even wild cards, meaning ignoring all files with a certain file type.
+
+```bash
+# Within the .gitignore file
+.project  # Ignore singular file
+*.py  # Ignore all .py files (wildcard)
+```
+
+Once this .gitignore is defined and saved, running the command *git status* again will show that they are now *invisible* to git and aren't picked up anymore.
+
 #### Committing
-If you have made changes to a file and wish to 'save' those changes, you must commit them.
+If you have made changes to a file and wish to 'save' those changes, you must commit them. Use a meaningful message so if you need to refer back to this commit later, you know exactly what you did at a glance without the need to search through the code changes.
 
 ```bash
 git commit -m "<Enter commit message>"  # -m is a commit message
@@ -155,6 +156,7 @@ git commit --amend  # Puts created file to last commit
 ```
 
 #### Commit changes to alternate branch
+_Branches are talked about later_.
 
 ```bash
 git log
@@ -197,11 +199,12 @@ git log  # Compare hash value of most recent to one copied earlier
 
 ---
 
-## Remote
+## Remote (GitHub)
 
 ---
 
 ### Basic usage
+Now this is the part everyone uses to collaborate. The directory on your computer that you are working from needs to be sent to a remote repository for others to see. You can either make the directory on your computer a new repository, or you can download an existing one from GitHub and store it locally.
 
 #### Cloning
 To make a local copy of a repository from GitHub, you must first 'clone' (download) it to your machine. This can be done easily on GitKraken. Once done you can pull/push and see all of the changes that have been made.
@@ -269,6 +272,7 @@ git diff <first hash number> <second hash number>
 The usual way to work with git on a day-to-day basis is to create branches for each feature you wish to implement.
 
 ### Branches
+Branches are used to protect the _main_ part from being messed up. The master repository should contain the working code, and any modifications or features that wish to be added should be done on a new branch. This branch contains (at the start) a copy of the code base upon creation, then the code can be changed seperately to the master branch, and when finished it can be _merged_ back to the master. GitHub controls the merge back and will warn of any errors that may occur and how to fix them before merging.
 
 #### Create
 
